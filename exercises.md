@@ -15,7 +15,7 @@ Gọi `call_openai` với temperature 0.0, 0.5, 1.0 và 1.5 dùng prompt
 **"Hãy kể cho tôi một sự thật thú vị về Việt Nam."**
 
 **Bạn nhận thấy quy luật gì qua bốn phản hồi?** (2–3 câu)
-> *Câu trả lời của bạn*
+> Khi gọi `call_openai` với temperature thấp (0.0 – 0.5), phản hồi mang tính xác định cao với câu trả lời cô đọng, được thể hiện dưới dạng các gạch đầu dòng, logic lập luận chặt chẽ. Khi temperature tăng lên (1.0 – 1.5), câu trả lời trở nên đa dạng, phong phú và sáng tạo hơn về góc nhìn cũng như cách trình bày; tuy nhiên ở mức 1.5 cách hành văn bắt đầu kém ổn định và có xu hướng lan man hơn, xuất hiện hiện tượng hallucination và phóng đại số liệu sai thực tế.
 
 ### Câu 1.2 — Chọn temperature cho sản phẩm
 **Bạn sẽ đặt temperature bao nhiêu cho chatbot hỗ trợ khách hàng, và tại sao?**
