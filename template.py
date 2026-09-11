@@ -34,7 +34,6 @@ PRICING_PER_1K_TOKENS = {
 OPENAI_MODEL = os.getenv("LAB_MODEL", "gpt-4o")
 OPENAI_MINI_MODEL = os.getenv("LAB_MINI_MODEL", "gpt-4o-mini")
 
-
 # ===========================================================================
 # PART 1 — API CƠ BẢN (Block 1: phút 60–100)
 # ===========================================================================
@@ -90,7 +89,6 @@ def call_openai(
     response_text = response.choices[0].message.content or ""
     return response_text, latency
 
-
 # ---------------------------------------------------------------------------
 # Task 1.2 — Gọi GPT-4o-mini
 # ---------------------------------------------------------------------------
@@ -116,7 +114,6 @@ def call_openai_mini(
         top_p=top_p,
         max_tokens=max_tokens,
     )
-
 
 # ---------------------------------------------------------------------------
 # Task 1.3 — So sánh GPT-4o vs GPT-4o-mini
@@ -152,7 +149,6 @@ def compare_models(prompt: str) -> dict:
         "mini_latency": mini_latency,
         "gpt4o_cost_estimate": gpt4o_cost_estimate,
     }
-
 
 # ===========================================================================
 # PART 2 — SYSTEM PROMPT & TOKEN (Block 2: phút 100–140)
@@ -208,7 +204,6 @@ def chat_with_system_prompt(
 
     return response_text, latency
 
-
 # ---------------------------------------------------------------------------
 # Task 2.2 — Đếm token bằng tiktoken
 # ---------------------------------------------------------------------------
@@ -239,7 +234,6 @@ def count_tokens(text: str, model: str = OPENAI_MODEL) -> int:
         return len(enc.encode(text))
     except Exception:
         return max(1, len(text) // 4)
-
 
 # ---------------------------------------------------------------------------
 # Task 2.3 — Ước tính chi phí chính xác
@@ -280,7 +274,6 @@ def estimate_cost(prompt: str, response: str, model: str = OPENAI_MODEL) -> dict
         "output_cost": output_cost,
         "total_cost": total_cost,
     }
-
 
 # ===========================================================================
 # PART 3 — STREAMING & ĐỘ BỀN (Block 3: phút 150–190)
@@ -346,7 +339,6 @@ def streaming_chatbot() -> None:
         history.append({"role": "assistant", "content": reply})
         history = history[-6:]
 
-
 # ---------------------------------------------------------------------------
 # Task 3.2 — Retry với exponential backoff
 # ---------------------------------------------------------------------------
@@ -378,7 +370,6 @@ def retry_with_backoff(
             if attempt == max_retries:
                 raise
             time.sleep(base_delay * (2 ** attempt))
-
 
 # ===========================================================================
 # PART 4 — MINI-PROJECT: TRỢ LÝ CLI HOÀN CHỈNH (Block 4: phút 190–230)
@@ -503,7 +494,6 @@ def run_assistant(
         "history": history,
     }
 
-
 # ===========================================================================
 # BONUS (không bắt buộc — cho bạn nào xong sớm)
 # ===========================================================================
@@ -542,7 +532,6 @@ def format_comparison_table(results: list[dict]) -> str:
         m_lat = f"{r.get('mini_latency', 0):.2f}s"
         lines.append(f"{p} | {g_resp} | {m_resp} | {g_lat} | {m_lat}")
     return "\n".join(lines)
-
 
 # ---------------------------------------------------------------------------
 # Entry point — demo chạy thật (cần OPENAI_API_KEY)
